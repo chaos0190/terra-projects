@@ -18,7 +18,7 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    backendServiceArm: 'Pay-As-You-Go(a86b02d4-bdfe-4fec-b63a-18c61d992583)'
+    backendServiceArm: 'backendterraconn'
     backendAzureRmResourceGroupName: 'gen-rgp'
     backendAzureRmStorageAccountName: 'chaosgenstore1990'
     backendAzureRmContainerName: 'terra'
