@@ -19,6 +19,8 @@ provider "azurerm" {
   features {}
 }
 
-module "name" {
+module "resourcegrp" {
   source = "./modules/general"
+  resource_group_name = var.resource_group_name
+  location = var.location
 }
