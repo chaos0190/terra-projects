@@ -23,3 +23,18 @@ steps:
     backendAzureRmStorageAccountName: 'chaosgenstore1990'
     backendAzureRmContainerName: 'terra'
     backendAzureRmKey: 'terra.tfstate'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    commandOptions: '--var-file general-var.tfvars --out=''gen-plan.tfplan'
+    environmentServiceNameAzureRM: 'backendterraconn'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    commandOptions: '--auto-approve'
+    environmentServiceNameAzureRM: 'backendterraconn'
+
