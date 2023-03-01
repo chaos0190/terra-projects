@@ -1,0 +1,16 @@
+# Ignore all files with the .tfstate extension
+*.tfstate
+*.tfplan
+
+# Ignore all files in the .terraform directory
+.terraform/*
+
+# Ignore any files in the .idea directory (used by IntelliJ IDEA)
+.idea/*
+
+# Ignore any files in the .vscode directory (used by Visual Studio Code)
+.vscode/*
+
+
+# Ignore any files in the .git directory (used by Git)
+.git/*
