@@ -11,11 +11,21 @@ pool:
 
 steps:
 - task: TerraformInstaller@1
+  displayName: Installing terraform
   inputs:
     terraformVersion: 'latest'
 
-- task: TerraformTaskV4@4
+- task: AzureKeyVault@2
+  displayName: Download terraform backend sas token from key-vault
   inputs:
+    azureSubscription: 'backendterraconn'
+    KeyVaultName: 'terra-vault1990'
+    SecretsFilter: 'terra-token'
+    RunAsPreJob: true
+- task: TerraformTaskV4@4
+  displayName: Terraform Init task
+  inputs:
+  
     provider: 'azurerm'
     command: 'init'
     backendServiceArm: 'backendterraconn'
@@ -23,8 +33,10 @@ steps:
     backendAzureRmStorageAccountName: 'chaosgenstore1990'
     backendAzureRmContainerName: 'terra'
     backendAzureRmKey: 'terra.tfstate'
+    backendAzureRmSasToken: $(terra-token)
 
 - task: TerraformTaskV4@4
+  displayName: Terraform plan
   inputs:
     provider: 'azurerm'
     command: 'plan'
@@ -32,6 +44,7 @@ steps:
     environmentServiceNameAzureRM: 'backendterraconn'
 
 - task: TerraformTaskV4@4
+  displayName: Terraform Apply
   inputs:
     provider: 'azurerm'
     command: 'apply'
